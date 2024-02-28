@@ -1,16 +1,18 @@
 import asyncio
 import re
+import os
 
 from telebot.async_telebot import AsyncTeleBot
 
 from EdgeGPT import Chatbot
 
 # Insert your Bot token
-BOT_TOKEN = '<INSERT YOUR TELEGRAM BOT TOKEN>'
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+
 bot = AsyncTeleBot(BOT_TOKEN)
 
 # Add your telegram id to the list without @ symbol
-authorized_id = ['<INSERT YOUR TELEGRAM USER NAME, NOT THE DISPLAY NAME>']
+authorized_id = os.environ.get('AUTHORIZED_USERS', '').split(',')
 
 
 async def bingChat(prompt, is_ref=False):
